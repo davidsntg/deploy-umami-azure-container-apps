@@ -93,12 +93,12 @@ az postgres flexible-server db create --resource-group $RESOURCE_GROUP --server-
 # CONTAINER APPS #
 ##################
 
-az containerapp env create --name "$CONTAINERAPPS_ENVIRONMENT" --resource-group "$RESOURCE_GROUP" --location "$LOCATION"
+az containerapp env create --name "$CONTAINERAPPS_ENVIRONMENT_NAME" --resource-group "$RESOURCE_GROUP" --location "$LOCATION"
 
 az containerapp create \
   --name "$CONTAINERAPPS_NAME" \
   --resource-group "$RESOURCE_GROUP" \
-  --environment "$CONTAINERAPPS_ENVIRONMENT" \
+  --environment "$CONTAINERAPPS_ENVIRONMENT_NAME" \
   --registry-server "$UMAMI_REGISTRY_SERVER" \
   --image "$UMAMI_IMAGE" \
   --registry-username "$UMAMI_REGISTRY_USERNAME" \
