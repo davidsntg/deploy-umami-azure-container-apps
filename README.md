@@ -41,7 +41,7 @@ UMAMI_REGISTRY_SERVER="ghcr.io"
 UMAMI_IMAGE="ghcr.io/umami-software/umami:postgresql-v1.38.0" # Don't use images > 1.38.0 right now: https://github.com/umami-software/umami/issues/1604
 UMAMI_REGISTRY_USERNAME="TO_CHANGE" # GitHub handle here
 UMAMI_REGISTRY_PASSWORD="TO_CHANGE" # GitHub token with only "read:packages" right. Generate it from https://github.com/settings/tokens/new
-UMAMI_HASHSALT=$(openssl rand -hex 32)
+UMAMI_HASHSALT="TO_CHANGE" # Example of salt: $(openssl rand -hex 32)
 UMAMI_DATABASE_URL="postgres://$POSTGRESQL_ADMINUSER:$POSTGRESQL_ADMINPASSWORD@$POSTGRESQL_NAME.postgres.database.azure.com:5432/$POSTGRESQL_DBNAME?sslmode=require"
 
 # ContainerApps
@@ -93,16 +93,16 @@ az postgres flexible-server db create --resource-group $RESOURCE_GROUP --server-
 # CONTAINER APPS #
 ##################
 
-az containerapp env create --name $CONTAINERAPPS_ENVIRONMENT --resource-group $RESOURCE_GROUP --location $LOCATION
+az containerapp env create --name "$CONTAINERAPPS_ENVIRONMENT" --resource-group "$RESOURCE_GROUP" --location "$LOCATION"
 
 az containerapp create \
-  --name $CONTAINERAPPS_NAME \
-  --resource-group $RESOURCE_GROUP \
-  --environment $CONTAINERAPPS_ENVIRONMENT \
-  --registry-server $UMAMI_REGISTRY_SERVER \
-  --image $UMAMI_IMAGE \
-  --registry-username $UMAMI_REGISTRY_USERNAME \
-  --registry-password $UMAMI_REGISTRY_PASSWORD \
+  --name "$CONTAINERAPPS_NAME" \
+  --resource-group "$RESOURCE_GROUP" \
+  --environment "$CONTAINERAPPS_ENVIRONMENT" \
+  --registry-server "$UMAMI_REGISTRY_SERVER" \
+  --image "$UMAMI_IMAGE" \
+  --registry-username "$UMAMI_REGISTRY_USERNAME" \
+  --registry-password "$UMAMI_REGISTRY_PASSWORD" \
   --target-port 3000 \
   --ingress 'external' \
   --query properties.configuration.ingress.fqdn \
