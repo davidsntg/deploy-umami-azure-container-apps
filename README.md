@@ -60,8 +60,8 @@ az provider register --namespace Microsoft.OperationalInsights
 ## Create Azure Resource group
 
 ```
-az account set -s $SUBSCRIPTION_ID
-az group create --name $RESOURCE_GROUP --location $LOCATION
+az account set -s "$SUBSCRIPTION_ID"
+az group create --name "$RESOURCE_GROUP" --location "$LOCATION"
 ```
 
 ## Deploy Azure Database for PostgreSQL flexible server
@@ -72,18 +72,18 @@ az group create --name $RESOURCE_GROUP --location $LOCATION
 ##############
 
 # Flexible service PostgreSQL creation
-az postgres flexible-server create --name $POSTGRESQL_NAME --resource-group $RESOURCE_GROUP  \
-  --location $LOCATION \
-  --admin-user $POSTGRESQL_ADMINUSER \
-  --admin-password $POSTGRESQL_ADMINPASSWORD \
-  --sku-name $POSTGRESQL_SKUNAME \
-  --tier $POSTGRESQL_TIER \
-  --version $POSTGRESQL_VERSION \
-  --storage-size $POSTGRESQL_STORAGESIZE \
+az postgres flexible-server create --name "$POSTGRESQL_NAME" --resource-group "$RESOURCE_GROUP"  \
+  --location "$LOCATION" \
+  --admin-user "$POSTGRESQL_ADMINUSER" \
+  --admin-password "$POSTGRESQL_ADMINPASSWORD" \
+  --sku-name "$POSTGRESQL_SKUNAME" \
+  --tier "$POSTGRESQL_TIER" \
+  --version "$POSTGRESQL_VERSION" \
+  --storage-size "$POSTGRESQL_STORAGESIZE" \
   --public-access 0.0.0.0 --yes 
 
 # Database creation
-az postgres flexible-server db create --resource-group $RESOURCE_GROUP --server-name $POSTGRESQL_NAME --database-name $POSTGRESQL_DBNAME
+az postgres flexible-server db create --resource-group "$RESOURCE_GROUP" --server-name "$POSTGRESQL_NAME" --database-name "$POSTGRESQL_DBNAME"
 ```
 
 ## Deploy Container Apps with umami Docker image
